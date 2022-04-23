@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0%;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #444;
+}
+
+.header {
+    height: 5vh;
+    background: linear-gradient(to right, #fa594f #56a8f4);
+    background-position: top;
+    color: #fff;
+}
+
+.nav-bg {
+    background: linear-gradient(to right,#ff7675, #ffeaa7);
+    color: #00cec9;
+    max-height: 10% !important;
+    
+}

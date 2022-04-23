@@ -1,0 +1,12 @@
+{% extends 'main_app/base.html'%}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    {% for i in context %}
+    <div>
+        {{ i }}
+    </div>
+    {% endfor %}
+{% endblock%}
