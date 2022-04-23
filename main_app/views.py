@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
 from .models import Post, WitzUser, Comments
 from .forms import WitzUserForm, CreatePostForm
 
@@ -18,8 +18,41 @@ class PostDetailView(DetailView):
     context_object_name = "context"
     template_name = "main_app/detail_post.html"
     
+    
+
+
+class UpdatePostView(UpdateView):
+    model = Post
+    fields = ["post"]
+    template_name = "main_app/create_post.html"
+
+    # def get_success_url(self) -> str:
+    #     return reverse("homepage")
+
+    # def get(self, request, pk):
+    #     context = get_object_or_404(Post, pk=pk)
+    #     return context
+    
+    # def get_queryset(self, pk):
+    #     super.__init__(self, pk)
+    #     queryset = Post.objects.get(pk=pk)
+    #     return queryset
+    
+class CreatePost(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = "__all__"
+    template_name = "main_app/create_post.html"
+    redirect_field_name = "homepage"
+    login_url  = "accounts/login"
+
+    def get_success_url(self) -> str:
+        return reverse("homepage")
+
+
+
 def profile(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(WitzUser, pk=pk)
+    # test = Post.objects.all().filter(author=pk)
     return render(request, "main_app/profile.html", {"context": post})
 
 def all_comments(request):
@@ -40,34 +73,3 @@ def account_creation(request):
     else:
         form = WitzUserForm()
         return render(request, "main_app/form_witzuser.html", {"form": form})
-
-    
-class CreatePost(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = "__all__"
-    template_name = "main_app/create_post.html"
-    redirect_field_name = "homepage"
-    login_url  = "accounts/login"
-
-    def get_success_url(self) -> str:
-        return reverse("homepage")
-
-
-# class CreatePost(UpdateView):
-#     model = Post
-#     fields = "__all__"
-#     template_name = "main_app/create_post.html"
-
-#     def get_success_url(self) -> str:
-#         return reverse("homepage")
-
-#     def get(self, request, pk):
-#         context = get_object_or_404(Post, pk=pk)
-#         return context
-    
-#     def get_queryset(self, pk):
-#         super.__init__(self, pk)
-#         queryset = Post.objects.get(pk=pk)
-#         return queryset
-
-    

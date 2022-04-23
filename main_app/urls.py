@@ -12,6 +12,6 @@ urlpatterns = [
     path("new_post/", views.CreatePost.as_view(), name="new_post"),
     path("post/<int:pk>", views.PostDetailView.as_view(), name='post_detail'),
 
-    path("profile/<int:pk>", views.profile, name="profile")
-    # path("update_post/<int:pk>", views.UpdateView.as_view(), name="update_post")
+    path("profile/<int:pk>", views.profile, name="profile"),
+    path("update_post/<int:pk>", views.UpdatePostView.as_view(), name="update_post")
 ]

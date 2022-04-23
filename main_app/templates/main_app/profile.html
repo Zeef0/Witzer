@@ -2,16 +2,27 @@
 
 {% block content %}
 
-    <div class="container d-flex justify-content-center">
+    <div class="container">
 
-        {{ context.author }}
-        <div class="container card mx-2">
+        <h1>{{ context }}</h1>
+        <small class="lead text-muted">Join Date: {{ context.date_created|date:"F d, Y"}}</small>
+        <hr>
+        {% for x in context.post_set.all %}
+        <div class="card my-2">
+            <div class="card-body">
+                <h2> 
+                        <a href="{% url 'main_app:post_detail' x.id%}" class="link">{{ x }}</h2></a>
+                </div>
+            </div>
+            {% endfor %}
+
+        <!-- <div class="container card mx-2">
             <div class="card-body">
             {% for x in context.post %}
                 {{ x }}
             {% endfor %}
             </div>
         </div>
-
+    -->
     </div>
 {% endblock %}

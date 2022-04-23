@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.urls import reverse
 from django.db.models import CharField
 from django.db.models.functions import Lower, Length
 from typing import Optional,Iterable
@@ -60,3 +60,6 @@ class Post(models.Model):
 
     def __str__(self):
      return self.post
+
+    def get_absolute_url(self):
+        return reverse('main_app:post_detail', kwargs={'pk': self.pk})

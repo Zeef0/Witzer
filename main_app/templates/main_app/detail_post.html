@@ -1,12 +1,22 @@
 {% extends 'main_app/base.html' %}
 {% block content %}
 
-    <h2>{{ context.author }}</h2>
+    <h2>{{ context.author }} == {{ request.user}}</h2>
     <hr>
     <div class="card container w-50">
     <p class="lead card-body border border-1">
-        {{ context.content }}
+        {{ context }}
     </p>
-</div>
+    
+    <div class="container w-25">
+    {% for x in context%}
+     {% if x.author == request.user %}
+     <button type="submit" class="btn btn-outline-success">Update</button>
+     <button type="submit" class="btn btn-outline-danger p2">Delete</button>
+     {% else %}
+     <h1>Conditioned did not match</h1>
+     {% endif %}
+    </div>
+    {% endfor %}
     
 {% endblock %}
