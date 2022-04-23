@@ -51,7 +51,7 @@ class Comments(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(WitzUser, on_delete=models.CASCADE)
-    content = models.TextField()
+    post = models.TextField()
     date_posted = models.DateField(default=timezone.now)
     post_count_like = models.IntegerField(default=0)
     

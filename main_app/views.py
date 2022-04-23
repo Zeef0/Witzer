@@ -5,16 +5,22 @@ from .forms import WitzUserForm, CreatePostForm
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
 class Homepage(ListView):
     model = Post
     template_name = "main_app/home.html"
     context_object_name = "context"
     ordering = ["-date_posted"]
+
+class PostDetailView(DetailView):
+    model = Post
+    context_object_name = "context"
+    template_name = "main_app/detail_post.html"
     
-
-
+def profile(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, "main_app/profile.html", {"context": post})
 
 def all_comments(request):
         return render(request, "main_app/comments.html", {"context": Comments.objects.all()})

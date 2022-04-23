@@ -1,0 +1,12 @@
+{% extends 'main_app/base.html' %}
+{% block content %}
+
+    <h2>{{ context.author }}</h2>
+    <hr>
+    <div class="card container w-50">
+    <p class="lead card-body border border-1">
+        {{ context.content }}
+    </p>
+</div>
+    
+{% endblock %}

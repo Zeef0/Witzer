@@ -17,12 +17,13 @@
     <nav class="navbar-nav navbar-expand-lg nav-bg mb-4">
         <ul class="nav-list fw-700">
             {% if request.user.is_authenticated %}
-            <li class="nav-item"><a href="{% url 'homepage'%}" class="nav-links">Home</a></li>
-            <li class="nav-item"><a href="{% url 'new_post'%}" class="nav-links">Create Post</a></li>
+            <li class="nav-item"><a href="{% url 'main_app:homepage'%}" class="nav-links">Home</a></li>
+            <li class="nav-item"><a href="{% url 'main_app:new_post'%}" class="nav-links">Create Post</a></li>
             <li class="nav-item"><a href="{% url 'logout'%}" class="nav-links">Signout</a></li>
             {% else %}
+            <li class="nav-item"><a href="{% url 'main_app:homepage'%}" class="nav-links">Home</a></li>
             <li class="nav-item"><a href="{% url 'login'%}" class="nav-links">Login</a></li>
-            <li class="nav-item"><a href="{% url 'account_creation'%}" class="nav-links">Register</a></li>
+            <li class="nav-item"><a href="{% url 'main_app:account_creation'%}" class="nav-links">Register</a></li>
 
             {% endif %}
         </ul>

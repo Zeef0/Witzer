@@ -1,0 +1,17 @@
+{% extends 'main_app/base.html '%}
+
+{% block content %}
+
+    <div class="container d-flex justify-content-center">
+
+        {{ context.author }}
+        <div class="container card mx-2">
+            <div class="card-body">
+            {% for x in context.post %}
+                {{ x }}
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
