@@ -3,10 +3,15 @@
 {% block css %}
 {% endblock %}
 
+
 {% block content %}
-    {% for i in context %}
-    <div>
-        {{ i }}
+<h1 class="text-center border-bottom ">x{{ context }}</h1>
+{% if context.comments_set.all %}
+{% for comment in context.comments_set.all %}
+    <div class="text-primary container w-50 border-bottom">
+        {{ comment }}
     </div>
-    {% endfor %}
+            {% endfor %}
+        {% endif %}
+    <a href="{% url 'main_app:create_comment' context.id %}" class="c">Add a comment</a>
 {% endblock%}

@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
 from .models import Post, WitzUser, Comments
-from .forms import WitzUserForm, CreatePostForm
+from .forms import WitzUserForm, CreatePostForm, PostCommentForm
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -55,9 +55,20 @@ def profile(request, pk):
     # test = Post.objects.all().filter(author=pk)
     return render(request, "main_app/profile.html", {"context": post})
 
-def all_comments(request):
-        return render(request, "main_app/comments.html", {"context": Comments.objects.all()})
+def all_comments(request, pk):
+        post = get_object_or_404(Post, pk=pk)
+        print(post.comments_set.all())
+        return render(request, "main_app/comments.html", {"context": post})
 
+def post_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    form = PostCommentForm()
+    if request.method == "POST":
+        form = PostCommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("main_app:homepage")
+    return render(request, "main_app/create_comment.html", {"context": post, "form": form})
 
 def account_creation(request):
     form = WitzUserForm()

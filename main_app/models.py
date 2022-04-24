@@ -40,7 +40,7 @@ class Comments(models.Model):
     witzer = models.ForeignKey(User, models.CASCADE)
     content = models.TextField()
     date_commented = models.DateTimeField(default=timezone.now)
-    post = models.ForeignKey("Post", related_name="comments", on_delete=models.CASCADE)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
     
     class Meta:
         verbose_name = "comments"

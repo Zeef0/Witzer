@@ -6,7 +6,8 @@ app_name = "main_app"
 urlpatterns = [
    
     path("", views.Homepage.as_view(), name="homepage"),
-    path("comments/", views.all_comments, name="all_comments"),
+    path("comments/<int:pk>", views.all_comments, name="all_comments"),
+    path("comments/<int:pk>/new_comment", views.post_comment, name="create_comment"),
     path("successfully_logout", views.logout_page, name="logout_page"),
     path("user_creation", views.account_creation, name="account_creation"),
 

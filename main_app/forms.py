@@ -6,7 +6,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
-from .models import Post, WitzUser
+from .models import Post, WitzUser, Comments
+
+
 class WitzUserForm(UserCreationForm):
     GENDER = (
         ("M", "Male"),
@@ -30,3 +32,8 @@ class CreatePostForm(ModelForm):
         widgets = {
             "content": forms.TextInput(attrs={"class": "form-control"})
         }
+
+class PostCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments 
+        fields = "__all__"
