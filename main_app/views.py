@@ -69,7 +69,12 @@ def account_creation(request):
             return redirect("homepage")
         else:
             form = WitzUserForm()
+            print(form)
             return render(request, "main_app/form_witzuser.html", {"form": form})
     else:
         form = WitzUserForm()
         return render(request, "main_app/form_witzuser.html", {"form": form})
+
+
+def logout_page(request):
+    return render(request, "main_app/magma.html")

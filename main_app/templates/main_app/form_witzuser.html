@@ -1,9 +1,15 @@
 {% extends 'main_app/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-    <form action="" enctype="multipart/form-data" method="post">
+    {% if errors for form.errors %}
+    <li>
+        <p>{{ errors }}</p>
+    </li>
+    {% endif %}
+    <form action="" enctype="multipart/form-data" method="post" class="form-group container w-50">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-outline-success mt-2">Signin</button>
     </form>
 {% endblock%}
