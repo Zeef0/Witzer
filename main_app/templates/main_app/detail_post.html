@@ -9,7 +9,7 @@
     </p>
     
     <div class="container w-25">
-    {% for x in context%}
+
      {% if x.author == request.user %}
      <button type="submit" class="btn btn-outline-success">Update</button>
      <button type="submit" class="btn btn-outline-danger p2">Delete</button>
@@ -17,6 +17,6 @@
      <h1>Conditioned did not match</h1>
      {% endif %}
     </div>
-    {% endfor %}
+
     
 {% endblock %}

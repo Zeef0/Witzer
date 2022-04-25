@@ -9,9 +9,13 @@
 {% if context.comments_set.all %}
 {% for comment in context.comments_set.all %}
     <div class="text-primary container w-50 border-bottom">
-        {{ comment }}
+        <p class="text-dark">
+            {{ request.user }}: {{ comment }}
+        </p>
     </div>
             {% endfor %}
+            {% else %}
+            <p class="lead text-center text-secondary">Wow! No comments for this post. Must suck</p>
         {% endif %}
     <a href="{% url 'main_app:create_comment' context.id %}" class="c">Add a comment</a>
 {% endblock%}

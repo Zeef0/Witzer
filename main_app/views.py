@@ -4,6 +4,7 @@ from .models import Post, WitzUser, Comments
 from .forms import WitzUserForm, CreatePostForm, PostCommentForm
 
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
@@ -60,12 +61,15 @@ def all_comments(request, pk):
         print(post.comments_set.all())
         return render(request, "main_app/comments.html", {"context": post})
 
+@login_required
 def post_comment(request, pk):
     post = get_object_or_404(Post, pk=pk)
     form = PostCommentForm()
     if request.method == "POST":
         form = PostCommentForm(request.POST)
         if form.is_valid():
+            form.instance.post = post
+            form.instance.witzer = request.user
             form.save()
             return redirect("main_app:homepage")
     return render(request, "main_app/create_comment.html", {"context": post, "form": form})
