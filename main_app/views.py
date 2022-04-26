@@ -51,6 +51,22 @@ class CreatePost(LoginRequiredMixin, CreateView):
 
 
 
+def test_homepage(request):
+    post = get_list_or_404(Post)
+    qs = request.GET.get("qs")
+    x = ""
+
+    
+    if qs != "" and qs is not None:
+        x = post.filter(post__icontains=qs)
+
+    context= {
+        "context": post
+    }
+    print(request.POST)
+
+    return render(request, "main_app/home.html", context)
+
 def profile(request, pk):
     post = get_object_or_404(WitzUser, pk=pk)
     # test = Post.objects.all().filter(author=pk)
