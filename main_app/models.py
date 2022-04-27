@@ -1,14 +1,18 @@
-from email.policy import default
-from tabnanny import verbose
+from distutils.command.upload import upload
 from django.db import models
+from django.contrib.auth.models import User
+
+
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
+
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import CharField
+
 from django.db.models.functions import Lower, Length
 from typing import Optional,Iterable
+
 CharField.register_lookup(Length)
 
 
@@ -21,9 +25,16 @@ class WitzUser(models.Model):
 
 
     )
+
+    def user_directory_path(self, instance, filename):
+  
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
+        return 'user_{0}/{1}'.format(instance.user.id, filename)
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=50, default=" ", choices=GENDER)
     date_created = models.DateTimeField(default=timezone.now)
+    profile_pic = models.ImageField(upload_to="profile_pic/", default="default.jpeg")
 
     def __str__(self):
         return self.user.username

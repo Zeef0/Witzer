@@ -6,13 +6,14 @@
 
 {% block content %}
 <div class="container border-bottom w-50">
-   <h2 class="text-primary">{{ context.author }}</h2> {{ context}}
+   <h2 class="text-primary fw-500">{{ context.author }}</h2> {{ context}}
 </div>
 
-<form action="" method="post">
+<form action="" method="post" class="form-group  container w-50">
     {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Post</button>
+        {{ form|crispy }}
+
+        <button type="submit" class="btn m-1 btn btn-success">Post</button>
 </form>
 hr
 

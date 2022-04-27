@@ -18,6 +18,7 @@
         {% for i in context%}
         <div class="card mx-auto mb-lg-3 mb-md-1" style="width: 30rem; border-radius: 8%;">
             <div class="card-body">
+              <img src="{{ context.witzer.profile_pic.url }}" alt="" class="card-img rounded-image">
               <h5 class="card-title"><a href="{% url 'main_app:profile' i.author.id %}">{{ i.author }}</a></h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ i.date_posted }}</h6>
               <p class="card-text"><a href="{% url 'main_app:post_detail' i.id%}">{{ i.post }}</a></p>
