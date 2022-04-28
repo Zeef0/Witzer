@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'rest_framework',
+    'corsheaders',
 
     'main_app',
     'api',
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# Core 
 
 ROOT_URLCONF = 'witzer.urls'
 
@@ -63,6 +65,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
