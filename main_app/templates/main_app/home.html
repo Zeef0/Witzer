@@ -23,7 +23,7 @@
               <h6 class="card-subtitle mb-2 text-muted">{{ i.date_posted }}</h6>
               <p class="card-text"><a href="{% url 'main_app:post_detail' i.id%}">{{ i.post }}</a></p>
               <a href="{% url 'main_app:all_comments' i.id %}" class="card-link">Comments</a>
-              <a href="#" class="card-link">Like?</a>
+              <a href="{% url 'main_app:like_post' i.id%}" class="card-link">Like</a> {{ i.post_count_like}}
             </div>
           </div>
           {% endfor %}

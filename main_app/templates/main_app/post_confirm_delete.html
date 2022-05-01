@@ -1,0 +1,19 @@
+{% extends 'main_app/base.html'%}
+{% block content %}
+
+<form method="post">{% csrf_token %}
+     
+ 
+ 
+    <div class="container w-50 border">
+        <p>Are you sure you want to delete "{{ context }}"?</p>
+        <input type="submit" value="Confirm" class="btn.btn-warning ">
+        <button class="btn btn-success"><a href="{% 'homepage'%}">Back to Home</a></button>
+
+    </div>
+     
+     
+     
+    </form>
+
+{% endblock %}

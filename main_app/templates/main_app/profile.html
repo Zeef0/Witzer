@@ -5,10 +5,11 @@
 
     <div class="content-section container">
         <div class="media">
-            <img src="{{ context.profile_pic.url}}" alt="{{ context }} profile pic" class="rounded-circle account-img w-25 h-25">
-            <div class="media-body">
-                <h3 class="account-heading text-secondary">{{ context }}</h3>
+            <img src="{{ context.profile_pic.url}}" alt="{{ context }} profile pic" class="rounded-circle account-img w-25" style="height: 50%; display:inline;">
+            <h3 class="account-heading text-secondary">{{ context }}</h3>
                 <small class="lead text-muted">Join Date: {{ context.date_created|date:"F d, Y"}}</small>
+            <div class="media-body">
+                
 
             </div>
 

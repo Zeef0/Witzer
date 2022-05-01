@@ -26,12 +26,10 @@ class WitzUserForm(UserCreationForm):
 class CreatePostForm(ModelForm):
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = ["post"]
+        
 
-
-        widgets = {
-            "content": forms.TextInput(attrs={"class": "form-control"})
-        }
+        
 
 class PostCommentForm(forms.ModelForm):
     class Meta:

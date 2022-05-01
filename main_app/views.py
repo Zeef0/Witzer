@@ -6,7 +6,7 @@ from .forms import WitzUserForm, CreatePostForm, PostCommentForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, UpdateView, ListView, DetailView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
 
 class Homepage(ListView):
     model = Post
@@ -27,6 +27,8 @@ class UpdatePostView(UpdateView):
     fields = ["post"]
     template_name = "main_app/create_post.html"
 
+    
+
     # def get_success_url(self) -> str:
     #     return reverse("homepage")
 
@@ -37,35 +39,46 @@ class UpdatePostView(UpdateView):
     # def get_queryset(self, pk):
     #     super.__init__(self, pk)
     #     queryset = Post.objects.get(pk=pk)
-    #     return queryset
+    #     return 
+    
+class PostDeleteView(DeleteView):
+    model = Post
+    context_object_name = "context"
+    
+    success_url = "/"
+    
     
 class CreatePost(LoginRequiredMixin, CreateView):
+    
     model = Post
-    fields = "__all__"
     template_name = "main_app/create_post.html"
     redirect_field_name = "homepage"
     login_url  = "accounts/login"
-
+    form_class = CreatePostForm
+    
     def get_success_url(self) -> str:
         return reverse("homepage")
 
+@login_required
+def create_post(request):
+    form = CreatePostForm()
+    if request.method == "POST":
+        form = CreatePostForm(request.POST)
+        if form.is_valid():
+            form.instance.author = request.user
+            form.save()
+            return redirect("main_app:homepage")
+    return render(request, "main_app/create_comment.html", {"form": form})
+
+def test_homepage(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    print(post.author, request.user)
+    print(str(post.author) == str(request.user))
+    print(type(request.user), type(post.author)) # SMH
 
 
-def test_homepage(request):
-    post = get_list_or_404(Post)
-    qs = request.GET.get("qs")
-    x = ""
-
-    
-    if qs != "" and qs is not None:
-        x = post.filter(post__icontains=qs)
-
-    context= {
-        "context": post
-    }
-    print(request.POST)
-
-    return render(request, "main_app/home.html", context)
+    return render(request, "main_app/test.html", {"context": post})
 
 def profile(request, pk):
     post = get_object_or_404(WitzUser, pk=pk)
@@ -74,7 +87,6 @@ def profile(request, pk):
 
 def all_comments(request, pk):
         post = get_object_or_404(Post, pk=pk)
-        print(post.comments_set.all())
         return render(request, "main_app/comments.html", {"context": post})
 
 @login_required
@@ -109,3 +121,14 @@ def account_creation(request):
 
 def logout_page(request):
     return render(request, "main_app/magma.html")
+
+
+@login_required
+def add_like(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    print(f"Post before increment {post.post_count_like}")
+    post.post_count_like += 1
+    print(f"Post before increment {post.post_count_like}")
+    post.save()
+    return redirect("main_app:homepage")

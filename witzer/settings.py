@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'main_app',
+    'main_app.template_tags.main_app_extras',
     'api',
 ]
 
@@ -74,6 +75,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'my_templatetag': 'main_app.template_tags.main_app_extras'
+            },
         },
     },
 ]

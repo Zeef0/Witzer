@@ -1,20 +1,30 @@
 {% extends 'main_app/base.html' %}
+
 {% block content %}
 
-    <h2>{{ context.author }} == {{ request.user}}</h2>
+    <h2 class="text-center">
+        <span><img src="{{ context.author.profile_pic.url}}" alt="" class="account-img"></span>
+        {{ context.author }}</h2>
     <hr>
     <div class="card container w-50">
-    <p class="lead card-body border border-1">
+    <p class="lead card-body text-center">
         {{ context }}
+        <p class="lead fw-400 pl-3 py-5">Likes: {{ context.post_count_like}}</p>
     </p>
     
+    {{ user }} {{ request.user }}
     <div class="container w-25">
-
-     {% if x.author == request.user %}
-     <button type="submit" class="btn btn-outline-success">Update</button>
-     <button type="submit" class="btn btn-outline-danger p2">Delete</button>
+     {% if request.user__str__  == context.author %}
+     <a href="{% url 'main_app:update_post' context.id%}">
+     <button type="submit" class="btn btn-success">
+          Update</button>
+        </a>
+    
+    <a href="{% url 'main_app:delete_post' context.id%}">
+     <button type="submit" class="btn btn-danger p2">Delete</button>
+     </a>
      {% else %}
-     <h1>Conditioned did not match</h1>
+     <h4>{{ request.user }}</h4>
      {% endif %}
     </div>
 

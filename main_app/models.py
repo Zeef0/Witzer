@@ -13,6 +13,8 @@ from django.db.models import CharField
 from django.db.models.functions import Lower, Length
 from typing import Optional,Iterable
 
+from PIL import Image
+
 CharField.register_lookup(Length)
 
 
@@ -35,6 +37,17 @@ class WitzUser(models.Model):
     gender = models.CharField(max_length=50, default=" ", choices=GENDER)
     date_created = models.DateTimeField(default=timezone.now)
     profile_pic = models.ImageField(upload_to="profile_pic/", default="default.jpeg")
+
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.profile_pic.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.profile_pic.path)
 
     def __str__(self):
         return self.user.username
@@ -61,7 +74,7 @@ class Comments(models.Model):
         return self.content
 
 class Post(models.Model):
-    author = models.ForeignKey(WitzUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.TextField()
     date_posted = models.DateField(default=timezone.now)
     post_count_like = models.IntegerField(default=0)
