@@ -20,4 +20,7 @@ urlpatterns = [
     path("new_post/", views.create_post, name="new_post"),
     path("update/post/<int:pk>", views.UpdatePostView.as_view(), name="update_post"),
     path("delete/post/<int:pk>", views.PostDeleteView.as_view(), name="delete_post"),
+
+    # Chat
+    path("lobby", views.lobby, name="chat_lobby"),
 ]

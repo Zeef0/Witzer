@@ -1,32 +1,69 @@
 {% extends 'main_app/base.html' %}
+{% load static %}
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'main_app/profile.css' %}">
 
+{% endblock %}
 {% block content %}
 
-    <h2 class="text-center">
-        <span><img src="{{ context.author.profile_pic.url}}" alt="" class="account-img"></span>
-        {{ context.author }}</h2>
-    <hr>
-    <div class="card container w-50">
-    <p class="lead card-body text-center">
-        {{ context }}
-        <p class="lead fw-400 pl-3 py-5">Likes: {{ context.post_count_like}}</p>
-    </p>
+    <!-- <div class="profile-box">
+            <div class="profile-img-box">
+                <img src="{{ context.author.witzuser.profile_pic.url}}" alt="" class="account-img">
+            </div>
+            <div class="content">
+                <div class="detail">
+                    <h2>
+                        {{ context.author }} <br> <span>
+                            {{ context.author.witzuser.date_created }}
+                        </span></div>
+                    </h2>
+            </div>
+        </div>
+    </div> -->
+    {% if context.author.profile_pic %}
+        <h2 class="text-center">
+            <span><img src="{{ context.author.profile_pic.url}}" alt="" class="account-img"></span>
+            {{ context.author }}</h2>
+        <hr>
+    {% endif %}
     
-    {{ user }} {{ request.user }}
-    <div class="container w-25">
-     {% if request.user__str__  == context.author %}
-     <a href="{% url 'main_app:update_post' context.id%}">
-     <button type="submit" class="btn btn-success">
-          Update</button>
-        </a>
-    
-    <a href="{% url 'main_app:delete_post' context.id%}">
-     <button type="submit" class="btn btn-danger p2">Delete</button>
-     </a>
-     {% else %}
-     <h4>{{ request.user }}</h4>
-     {% endif %}
+
+    {% if context.picture %}
+    <div class="card container w-50 text-center">
+        <p class="lead card-body">
+            {{ context }}
+        </p>
+        <div class="img " style="height: 100px;">
+            <img src="{{ context.pictures.url }}" alt="" class="img"></div>
     </div>
+    {% else %}
+    <div class="card container w-50 text-center">
+        <p class="lead card-body">
+            {{ context }}
+        </p>
+    
+
+
+
+    <div class="container w-25">
+        {% if request.user  == context.author %}
+        <a href="{% url 'main_app:update_post' context.id%}">
+        <button type="submit" class="btn btn-success">
+             Update</button>
+           </a>
+       
+       <a href="{% url 'main_app:delete_post' context.id%}">
+        <button type="submit" class="btn btn-danger p2">Delete</button>
+        </a>
+        {% else %}
+        <h4>{{ context.author }}</h4>
+        {% endif %}
+       </div>
+       {% endif %}
+       <p> Likes: {{ context.post_count_like}}</p>
+    </div>
+       <!-- {{ user }} {{ request.user }} -->
+
 
     
 {% endblock %}

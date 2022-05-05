@@ -132,3 +132,7 @@ def add_like(request, pk):
     print(f"Post before increment {post.post_count_like}")
     post.save()
     return redirect("main_app:homepage")
+
+
+def lobby(request):
+    return render(request, 'main_app/chap.html')

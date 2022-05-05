@@ -36,7 +36,7 @@ class WitzUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=50, default=" ", choices=GENDER)
     date_created = models.DateTimeField(default=timezone.now)
-    profile_pic = models.ImageField(upload_to="profile_pic/", default="default.jpeg")
+    profile_pic = models.ImageField(upload_to="profile_pic/", default="default_pic.jpg")
 
 
     def save(self):
@@ -78,7 +78,7 @@ class Post(models.Model):
     post = models.TextField()
     date_posted = models.DateField(default=timezone.now)
     post_count_like = models.IntegerField(default=0)
-    
+    pictures = models.ImageField(upload_to="post_pics/", blank=True)
     class Meta:
         ordering = ["date_posted"]
 

@@ -14,22 +14,38 @@
 <!-- Html Content  -->
 {% block content %}
 
-    <main class="container w-50 border border-2">
+    <main class="container  w-50-md border border-2 border-radius-2">
         {% for i in context%}
-        <div class="card mx-auto mb-lg-3 mb-md-1" style="width: 30rem; border-radius: 8%;">
+        <div class="card mx-auto mb-lg-3 mb-md-1" style="width: 30rem; border-radius: 12%;">
             <div class="card-body">
-              <img src="{{ context.witzer.profile_pic.url }}" alt="" class="card-img rounded-image">
-              <h5 class="card-title"><a href="{% url 'main_app:profile' i.author.id %}">{{ i.author }}</a></h5>
+              <img src="{{ context.user.profile_pic.url }}" alt="" class="card-img rounded-image">
+              <h5 class="card-title"><a href="{% url 'main_app:profile' i.author.id%}">{{ i.author }}</a></h5>
               <h6 class="card-subtitle mb-2 text-muted">{{ i.date_posted }}</h6>
-              <p class="card-text"><a href="{% url 'main_app:post_detail' i.id%}">{{ i.post }}</a></p>
-              <a href="{% url 'main_app:all_comments' i.id %}" class="card-link">Comments</a>
-              <a href="{% url 'main_app:like_post' i.id%}" class="card-link">Like</a> {{ i.post_count_like}}
-            </div>
+              <p class="card-text"><a href="{% url 'main_app:post_detail' i.id%}"   class="post-text">{{ i.post }}</p>
+                <div class="img-container w-25">
+                  {% if i.pictures %}
+                  <img src="{{ i.pictures.url }}" alt="" style="height: 180px; display: block;" class="post-img"></a></p>
+                {% endif %}
+
+                </div>
+                {% for comment in i.comments_set.all %}
+                  {{ comment }}
+                {% endfor %}
+              </a>
+                
+                <span class="border-top pt-5">
+
+                  <a href="{% url 'main_app:create_comment' i.id%}" class="card-link text-pink">Comment</a>
+                  <a href="{% url 'main_app:like_post' i.id%}" class="card-link text-blue">Like {{ i.post_count_like}}</a>
+                </span>
+                </div>
           </div>
+
+
           {% endfor %}
     </main>
 
-    <sidenav class="sidenav w-25" style="position: absolute; top: 50%; left: 78%;">
+    <sidenav class="sidenav w-25" style="position: relative; top: 50%; left: 78%;">
       <form action="" method="post" class="form-control">
         {% csrf_token %}
         <input type="search" name="qs" placeholder="Search" class="mb-2">

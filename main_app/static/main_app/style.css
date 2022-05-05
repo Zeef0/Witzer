@@ -26,3 +26,37 @@ body {
     max-height: 10% !important;
     
 }
+.post-text {
+    font-size: 1.6rem;
+    letter-spacing: 1.8px;
+    font-weight: 550;
+    text-decoration: none;
+    text-align: center;
+    color: #000;
+}
+
+.text-pink {
+    font-size: 1.4rem;
+    font-weight: 450;
+    text-decoration: none;
+    color: #ff7675;
+}
+
+.text-blue {
+    font-size: 1.6rem;
+    font-weight: 550;
+    text-decoration: none;
+    color: #56a8f4;
+}
+.post-img {
+    background-size: cover;
+}
+
+nav a.nav-item {
+    text-decoration: none!important;
+    color: #000;
+}
+li.nav-item a:link {
+    text-decoration: none!important;
+    color: #fff;
+}
