@@ -29,7 +29,7 @@
 
                 </div>
                 {% for comment in i.comments_set.all %}
-                  {{ comment }}
+                  <h6> {{ comment }}</h6>
                 {% endfor %}
               </a>
                 
@@ -45,7 +45,7 @@
           {% endfor %}
     </main>
 
-    <sidenav class="sidenav w-25" style="position: relative; top: 50%; left: 78%;">
+    <sidenav class="sidenav w-25 text-left" style="position: absolute; top: 50%; left: 78%;">
       <form action="" method="post" class="form-control">
         {% csrf_token %}
         <input type="search" name="qs" placeholder="Search" class="mb-2">

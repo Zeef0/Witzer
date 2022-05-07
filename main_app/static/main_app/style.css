@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Andada+Pro:ital@1&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family:   'Andada Pro', 'Times New Roman', Times, serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
@@ -33,6 +35,9 @@ body {
     text-decoration: none;
     text-align: center;
     color: #000;
+    font-family:   'Andada Pro', 'Times New Roman', Times, serif;
+    line-height: 1.7;
+    
 }
 
 .text-pink {
